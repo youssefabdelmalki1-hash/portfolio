@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Youssef Abdelmalki — Consultant SAP S/4HANA & Supply Chain</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #F7F5F2;
+      --surface: #FFFFFF;
+      --text-primary: #1A1A1A;
+      --text-secondary: #6B6B6B;
+      --accent: #2C4A6E;
+      --accent-light: #E8EEF5;
+      --accent-mid: #4A7AAD;
+      --border: #E2DDD8;
+      --tag-bg: #EEF2F7;
+      --gold: #B8955A;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(247,245,242,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0 5vw;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    .lang-toggle {
+      display: flex; gap: 8px;
+    }
+    .lang-btn {
+      background: none; border: 1px solid var(--border);
+      padding: 4px 12px; border-radius: 20px;
+      font-size: 0.75rem; font-weight: 600; cursor: pointer;
+      letter-spacing: 0.05em; transition: all 0.2s;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-secondary);
+    }
+    .lang-btn.active {
+      background: var(--accent); color: white; border-color: var(--accent);
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 80px 5vw 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 45%; height: 100%;
+      background: linear-gradient(135deg, var(--accent-light) 0%, #D8E6F3 100%);
+      clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+      z-index: 0;
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      max-width: 680px;
+    }
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+    .hero-title {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 400;
+      color: var(--accent);
+      margin-bottom: 28px;
+      font-style: italic;
+    }
+    .hero-desc {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      max-width: 520px;
+      line-height: 1.75;
+      margin-bottom: 40px;
+    }
+    .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--accent); color: white;
+      padding: 13px 28px; border-radius: 4px;
+      text-decoration: none; font-weight: 600;
+      font-size: 0.88rem; letter-spacing: 0.04em;
+      transition: background 0.2s, transform 0.15s;
+      border: none; cursor: pointer;
+    }
+    .btn-primary:hover { background: #1f3550; transform: translateY(-1px); }
+    .btn-secondary {
+      border: 1.5px solid var(--accent); color: var(--accent);
+      padding: 13px 28px; border-radius: 4px;
+      text-decoration: none; font-weight: 600;
+      font-size: 0.88rem; letter-spacing: 0.04em;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { background: var(--accent-light); }
+
+    .hero-meta {
+      position: absolute; bottom: 48px; right: 5vw;
+      z-index: 1;
+      display: flex; flex-direction: column; gap: 10px; align-items: flex-end;
+    }
+    .hero-meta-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.82rem; color: var(--text-secondary);
+    }
+    .hero-meta-item span.dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold);
+    }
+
+    /* SECTIONS */
+    section { padding: 90px 5vw; }
+    section:nth-child(even) { background: var(--surface); }
+
+    .section-header {
+      margin-bottom: 60px;
+    }
+    .section-label {
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+    .section-divider {
+      width: 48px; height: 3px;
+      background: var(--accent); margin-top: 14px;
+    }
+
+    /* EXPERIENCE */
+    .experience-list { display: flex; flex-direction: column; gap: 48px; }
+    .exp-card {
+      display: grid; grid-template-columns: 220px 1fr;
+      gap: 40px; position: relative;
+    }
+    .exp-card::before {
+      content: '';
+      position: absolute; left: 220px; top: 0; bottom: -48px;
+      width: 1px; background: var(--border);
+    }
+    .exp-card:last-child::before { display: none; }
+    .exp-meta { padding-top: 4px; }
+    .exp-date {
+      font-size: 0.78rem; font-weight: 600;
+      color: var(--accent); letter-spacing: 0.06em;
+      text-transform: uppercase; margin-bottom: 6px;
+    }
+    .exp-company {
+      font-size: 0.9rem; font-weight: 500; color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+    .exp-location {
+      font-size: 0.78rem; color: var(--text-secondary);
+      display: flex; align-items: center; gap: 4px;
+    }
+    .exp-dot {
+      position: absolute; left: 214px; top: 6px;
+      width: 13px; height: 13px; border-radius: 50%;
+      background: var(--accent); border: 3px solid var(--bg);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+    section:nth-child(even) .exp-dot { border-color: var(--surface); }
+    .exp-body { padding-left: 32px; }
+    .exp-role {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 600;
+      color: var(--text-primary); margin-bottom: 12px;
+    }
+    .exp-desc {
+      color: var(--text-secondary); font-size: 0.9rem;
+      line-height: 1.7; margin-bottom: 16px;
+    }
+    .exp-missions { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+    .exp-missions li {
+      padding-left: 16px; position: relative;
+      font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;
+    }
+    .exp-missions li::before {
+      content: '→';
+      position: absolute; left: 0;
+      color: var(--accent-mid); font-weight: 600;
+    }
+    .exp-projects { margin-top: 20px; }
+    .exp-project-title {
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 12px;
+    }
+    .project-item {
+      border-left: 2px solid var(--accent-light);
+      padding: 10px 16px; margin-bottom: 10px;
+      background: var(--accent-light);
+      border-radius: 0 4px 4px 0;
+    }
+    .project-item strong {
+      font-size: 0.88rem; font-weight: 600;
+      color: var(--text-primary); display: block; margin-bottom: 4px;
+    }
+    .project-item p {
+      font-size: 0.83rem; color: var(--text-secondary); line-height: 1.6;
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 28px;
+    }
+    .skill-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 28px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .skill-card:hover {
+      border-color: var(--accent-mid);
+      box-shadow: 0 4px 24px rgba(44,74,110,0.08);
+    }
+    .skill-card-icon {
+      width: 40px; height: 40px; border-radius: 8px;
+      background: var(--accent-light);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px; font-size: 1.2rem;
+    }
+    .skill-card h3 {
+      font-size: 0.95rem; font-weight: 700;
+      color: var(--text-primary); margin-bottom: 14px;
+      letter-spacing: 0.01em;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tag {
+      background: var(--tag-bg);
+      color: var(--accent);
+      padding: 4px 11px; border-radius: 20px;
+      font-size: 0.76rem; font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+    .tag.gold { background: #F5ECD8; color: var(--gold); }
+
+    /* FORMATION */
+    .edu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+    .edu-card {
+      border: 1px solid var(--border); border-radius: 8px;
+      padding: 28px; background: var(--bg);
+    }
+    .edu-year {
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 8px;
+    }
+    .edu-degree {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; font-weight: 600;
+      color: var(--text-primary); margin-bottom: 6px;
+    }
+    .edu-school { font-size: 0.88rem; color: var(--text-secondary); }
+
+    /* LANGUES */
+    .lang-grid { display: flex; flex-wrap: wrap; gap: 16px; }
+    .lang-item {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--tag-bg); border-radius: 6px;
+      padding: 12px 20px;
+    }
+    .lang-flag { font-size: 1.3rem; }
+    .lang-name { font-weight: 600; font-size: 0.9rem; color: var(--text-primary); }
+    .lang-level { font-size: 0.8rem; color: var(--text-secondary); }
+
+    /* CONTACT */
+    .contact-section {
+      background: var(--accent) !important;
+      color: white;
+    }
+    .contact-section .section-label { color: rgba(255,255,255,0.6); }
+    .contact-section .section-title { color: white; }
+    .contact-section .section-divider { background: var(--gold); }
+    .contact-grid {
+      display: flex; flex-wrap: wrap; gap: 24px; margin-top: 40px;
+    }
+    .contact-item {
+      display: flex; align-items: center; gap: 14px;
+      background: rgba(255,255,255,0.08); border-radius: 6px;
+      padding: 16px 24px; border: 1px solid rgba(255,255,255,0.15);
+    }
+    .contact-icon { font-size: 1.1rem; }
+    .contact-label { font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-bottom: 2px; letter-spacing: 0.05em; text-transform: uppercase; }
+    .contact-value { font-size: 0.95rem; font-weight: 500; color: white; }
+
+    /* FOOTER */
+    footer {
+      text-align: center; padding: 28px 5vw;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem; color: var(--text-secondary);
+    }
+
+    /* ANIMATIONS */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .exp-card { grid-template-columns: 1fr; }
+      .exp-card::before { display: none; }
+      .exp-dot { display: none; }
+      .exp-body { padding-left: 0; }
+      nav .nav-links { display: none; }
+      .hero::before { width: 100%; opacity: 0.3; clip-path: none; }
+    }
+
+    /* i18n hidden */
+    [data-lang] { display: none; }
+    [data-lang].shown { display: block; }
+    .tag[data-lang], .lang-name[data-lang], p[data-lang], li[data-lang], span[data-lang] {
+      display: none;
+    }
+    .tag[data-lang].shown, .lang-name[data-lang].shown, p[data-lang].shown, li[data-lang].shown, span[data-lang].shown {
+      display: inline;
+    }
+    strong[data-lang] { display: none; }
+    strong[data-lang].shown { display: block; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Y. Abdelmalki</div>
+  <ul class="nav-links">
+    <li><a href="#experience"><span class="t" data-fr="Expérience" data-en="Experience">Expérience</span></a></li>
+    <li><a href="#competences"><span class="t" data-fr="Compétences" data-en="Skills">Compétences</span></a></li>
+    <li><a href="#formation"><span class="t" data-fr="Formation" data-en="Education">Formation</span></a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content fade-in">
+    <div class="hero-eyebrow">CONSULTANT SAP S/4HANA & SUPPLY CHAIN</div>
+    <h1>Youssef<br>Abdelmalki</h1>
+    <div class="hero-title">
+      <span class="t" data-fr="Consultant Fonctionnel ERP — Chef de projet SI" data-en="Functional ERP Consultant — IT Project Manager">Consultant Fonctionnel ERP — Chef de projet SI</span>
+    </div>
+    <p class="hero-desc t" data-fr="Spécialisé dans l'implémentation et le support des ERP SAP S/4HANA, Sage X3 et CGI Retail Suite. Expérience sur des projets complexes multi-pays (France, Côte d'Ivoire, Sénégal, Cameroun) couvrant les processus Order-to-Cash et Procure-to-Pay." data-en="Specialized in implementation and support of SAP S/4HANA, Sage X3 and CGI Retail Suite ERP systems. Experience on complex multi-country projects (France, Ivory Coast, Senegal, Cameroon) covering Order-to-Cash and Procure-to-Pay processes.">
+      Spécialisé dans l'implémentation et le support des ERP SAP S/4HANA, Sage X3 et CGI Retail Suite. Expérience sur des projets complexes multi-pays (France, Côte d'Ivoire, Sénégal, Cameroun) couvrant les processus Order-to-Cash et Procure-to-Pay.
+    </p>
+    <div class="hero-ctas">
+      <a href="#experience" class="btn-primary t" data-fr="Voir mon parcours" data-en="View my experience">Voir mon parcours</a>
+      <a href="#contact" class="btn-secondary t" data-fr="Me contacter" data-en="Contact me">Me contacter</a>
+    </div>
+  </div>
+  <div class="hero-meta fade-in">
+    <div class="hero-meta-item"><span class="dot"></span> Paris, 75015</div>
+    <div class="hero-meta-item"><span class="dot"></span> <span class="t" data-fr="Disponible pour opportunités" data-en="Open to opportunities">Disponible pour opportunités</span></div>
+    <div class="hero-meta-item"><span class="dot"></span> TOEIC 840 / 990</div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header fade-in">
+    <div class="section-label t" data-fr="Parcours professionnel" data-en="Career path">Parcours professionnel</div>
+    <h2 class="section-title t" data-fr="Expériences" data-en="Experience">Expériences</h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="experience-list">
+
+    <!-- CFAO -->
+    <div class="exp-card fade-in">
+      <div class="exp-meta">
+        <div class="exp-date t" data-fr="Sept. 2024 — Présent" data-en="Sept. 2024 — Present">Sept. 2024 — Présent</div>
+        <div class="exp-company">CFAO (Toyota Tsusho Corp.)</div>
+        <div class="exp-location">📍 Boulogne-Billancourt</div>
+      </div>
+      <div class="exp-dot"></div>
+      <div class="exp-body">
+        <div class="exp-role t" data-fr="Chef de projet SI / Consultant Fonctionnel ERP" data-en="IT Project Manager / Functional ERP Consultant">Chef de projet SI / Consultant Fonctionnel ERP</div>
+        <p class="exp-desc t" data-fr="Au sein de la DSI Retail & FMCG, pilotage et support fonctionnel sur les ERP stratégiques du groupe, en lien direct avec les équipes métier et techniques." data-en="Within the Retail & FMCG IT department, steering and functional support on the group's strategic ERP systems, in direct collaboration with business and technical teams.">
+          Au sein de la DSI Retail & FMCG, pilotage et support fonctionnel sur les ERP stratégiques du groupe, en lien direct avec les équipes métier et techniques.
+        </p>
+        <ul class="exp-missions">
+          <li class="t" data-fr="Recueil et analyse des besoins métier & rédaction de spécifications fonctionnelles et techniques" data-en="Gathering and analysis of business needs & drafting of functional and technical specifications">Recueil et analyse des besoins métier & rédaction de spécifications fonctionnelles et techniques</li>
+          <li class="t" data-fr="Paramétrage, support fonctionnel et conduite du changement sur Sage X3 et CGI Retail Suite" data-en="Configuration, functional support and change management on Sage X3 and CGI Retail Suite">Paramétrage, support fonctionnel et conduite du changement sur Sage X3 et CGI Retail Suite</li>
+          <li class="t" data-fr="Participation aux comités de pilotage et comités de projet" data-en="Participation in steering committees and project committees">Participation aux comités de pilotage et comités de projet</li>
+          <li class="t" data-fr="Élaboration de cahiers des charges et de modes opératoires" data-en="Development of functional requirements and operating procedures">Élaboration de cahiers des charges et de modes opératoires</li>
+          <li class="t" data-fr="Préparation et exécution des recettes fonctionnelles" data-en="Preparation and execution of functional acceptance testing">Préparation et exécution des recettes fonctionnelles</li>
+        </ul>
+        <div class="exp-projects">
+          <div class="exp-project-title t" data-fr="Projets majeurs" data-en="Key projects">Projets majeurs</div>
+
+          <div class="project-item">
+            <strong class="t" data-fr="🛒 Référencement fournisseur Carrefour — CGI Retail Suite & Sage X3" data-en="🛒 Carrefour Supplier Referencing — CGI Retail Suite & Sage X3">🛒 Référencement fournisseur Carrefour — CGI Retail Suite & Sage X3</strong>
+            <p class="t" data-fr="Rédaction de la spécification fonctionnelle pour la mise à jour de +14 000 articles sur les 2 ERP dans le cadre de la migration Carrefour vers SAP S/4HANA. Réalisation de la recette fonctionnelle complète." data-en="Drafting of the functional specification for updating +14,000 items across 2 ERP systems as part of Carrefour's migration to SAP S/4HANA. Full functional acceptance testing.">Rédaction de la spécification fonctionnelle pour la mise à jour de +14 000 articles sur les 2 ERP dans le cadre de la migration Carrefour vers SAP S/4HANA. Réalisation de la recette fonctionnelle complète.</p>
+          </div>
+
+          <div class="project-item">
+            <strong class="t" data-fr="🌍 Optimisation & Sécurisation de processus — CGI Retail Suite (Multi-pays)" data-en="🌍 Process Optimization & Security — CGI Retail Suite (Multi-country)">🌍 Optimisation & Sécurisation de processus — CGI Retail Suite (Multi-pays)</strong>
+            <p class="t" data-fr="Pilotage end-to-end d'un projet déployé en France, Côte d'Ivoire, Sénégal et Cameroun. Cadrage, contrôles sur données, recettes, formation des utilisateurs en filiales, coordination avec CGI & INTERSYSTEMS." data-en="End-to-end management of a project deployed in France, Ivory Coast, Senegal and Cameroon. Scoping, data controls, testing, end-user training in subsidiaries, coordination with CGI & INTERSYSTEMS.">Pilotage end-to-end d'un projet déployé en France, Côte d'Ivoire, Sénégal et Cameroun. Cadrage, contrôles sur données, recettes, formation des utilisateurs en filiales, coordination avec CGI & INTERSYSTEMS.</p>
+          </div>
+
+          <div class="project-item">
+            <strong class="t" data-fr="📊 Migration comptabilité Sage X3 (Holding → Filiales)" data-en="📊 Sage X3 Accounting Migration (Holding → Subsidiaries)">📊 Migration comptabilité Sage X3 (Holding → Filiales)</strong>
+            <p class="t" data-fr="Recette complète des processus O2C et P2P (multi-pays, multi-flux : Food, Brand, W&I) incluant commandes, pré-réception, réception, export et facturation." data-en="Full testing of O2C and P2P processes (multi-country, multi-flow: Food, Brand, W&I) including orders, pre-receipt, receipt, export and invoicing.">Recette complète des processus O2C et P2P (multi-pays, multi-flux : Food, Brand, W&I) incluant commandes, pré-réception, réception, export et facturation.</p>
+          </div>
+
+          <div class="project-item">
+            <strong class="t" data-fr="🔧 Montée de version ERP Sage X3" data-en="🔧 Sage X3 ERP Version Upgrade">🔧 Montée de version ERP Sage X3</strong>
+            <p class="t" data-fr="Réalisation de la recette des fonctionnalités ADV/Supply et administrateur." data-en="Acceptance testing of ADV/Supply and administrator functionalities.">Réalisation de la recette des fonctionnalités ADV/Supply et administrateur.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SALVIA -->
+    <div class="exp-card fade-in">
+      <div class="exp-meta">
+        <div class="exp-date">Sept. 2022 — Sept. 2024</div>
+        <div class="exp-company">Salvia Développement</div>
+        <div class="exp-location">📍 Paris 75017</div>
+      </div>
+      <div class="exp-dot"></div>
+      <div class="exp-body">
+        <div class="exp-role t" data-fr="Consultant Support Applicatif ERP" data-en="ERP Application Support Consultant">Consultant Support Applicatif ERP</div>
+        <p class="exp-desc t" data-fr="Support applicatif sur plusieurs modules ERP dans le secteur du logement social, gestion des incidents, contrôle de l'intégrité des données et coordination technique." data-en="Application support on multiple ERP modules in the social housing sector, incident management, data integrity control and technical coordination.">
+          Support applicatif sur plusieurs modules ERP dans le secteur du logement social, gestion des incidents, contrôle de l'intégrité des données et coordination technique.
+        </p>
+        <ul class="exp-missions">
+          <li class="t" data-fr="Analyse et résolution d'incidents applicatifs (patrimoine, financement, états réglementaires)" data-en="Analysis and resolution of application incidents (assets, financing, regulatory reports)">Analyse et résolution d'incidents applicatifs (patrimoine, financement, états réglementaires)</li>
+          <li class="t" data-fr="Contrôle de l'intégrité des données, gestion des droits, restauration et mise à jour des bases (SQL Server, DBManager)" data-en="Data integrity control, rights management, database restoration and update (SQL Server, DBManager)">Contrôle de l'intégrité des données, gestion des droits, restauration et mise à jour des bases (SQL Server, DBManager)</li>
+          <li class="t" data-fr="Création des comptes clients et coordination des demandes de migration vers Active Directory" data-en="Client account creation and coordination of migration requests to Active Directory">Création des comptes clients et coordination des demandes de migration vers Active Directory</li>
+          <li class="t" data-fr="Suivi des tickets techniques en coordination avec les équipes développement et BDD" data-en="Technical ticket follow-up in coordination with development and database teams">Suivi des tickets techniques en coordination avec les équipes développement et BDD</li>
+          <li class="t" data-fr="Rédaction de modes opératoires et communication auprès des utilisateurs" data-en="Writing operating procedures and communication to end users">Rédaction de modes opératoires et communication auprès des utilisateurs</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ACTION LOGEMENT -->
+    <div class="exp-card fade-in">
+      <div class="exp-meta">
+        <div class="exp-date t" data-fr="Juil. — Août 2022" data-en="Jul. — Aug. 2022">Juil. — Août 2022</div>
+        <div class="exp-company">Action Logement</div>
+        <div class="exp-location">📍 Paris 75013</div>
+      </div>
+      <div class="exp-dot"></div>
+      <div class="exp-body">
+        <div class="exp-role t" data-fr="Technicien Support de Proximité — Stage" data-en="On-site IT Support Technician — Internship">Technicien Support de Proximité — Stage</div>
+        <ul class="exp-missions">
+          <li class="t" data-fr="Gestion des incidents utilisateurs" data-en="User incident management">Gestion des incidents utilisateurs</li>
+          <li class="t" data-fr="Attributions et restitutions de matériel informatique" data-en="IT equipment allocation and retrieval">Attributions et restitutions de matériel informatique</li>
+          <li class="t" data-fr="Masterisations d'ordinateurs" data-en="Computer imaging and deployment">Masterisations d'ordinateurs</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMPETENCES -->
+<section id="competences">
+  <div class="section-header fade-in">
+    <div class="section-label t" data-fr="Expertise technique" data-en="Technical expertise">Expertise technique</div>
+    <h2 class="section-title t" data-fr="Compétences" data-en="Skills">Compétences</h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="skills-grid">
+    <div class="skill-card fade-in">
+      <div class="skill-card-icon">⚙️</div>
+      <h3>ERP / PGI</h3>
+      <div class="tags">
+        <span class="tag gold">SAP S/4HANA</span>
+        <span class="tag">Sage X3</span>
+        <span class="tag">CGI Retail Suite</span>
+        <span class="tag">Order-to-Cash</span>
+        <span class="tag">Procure-to-Pay</span>
+        <span class="tag">Plan-to-Produce</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-icon">📋</div>
+      <h3 class="t" data-fr="Gestion de Projet" data-en="Project Management">Gestion de Projet</h3>
+      <div class="tags">
+        <span class="tag">SCRUM</span>
+        <span class="tag">KANBAN</span>
+        <span class="tag">Cycle en V</span>
+        <span class="tag">BPMN</span>
+        <span class="tag">UML</span>
+        <span class="tag gold">PSM I (prévu 2026)</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-icon">📊</div>
+      <h3>Data & BI</h3>
+      <div class="tags">
+        <span class="tag">Power BI</span>
+        <span class="tag">Power Query</span>
+        <span class="tag">SQL</span>
+        <span class="tag">SQL Server</span>
+        <span class="tag">Excel (TCD)</span>
+        <span class="tag">Machine Learning (notions)</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-icon">🛠️</div>
+      <h3 class="t" data-fr="Outils & Environnement" data-en="Tools & Environment">Outils & Environnement</h3>
+      <div class="tags">
+        <span class="tag">Jira</span>
+        <span class="tag">ServiceNow</span>
+        <span class="tag">MantisBT</span>
+        <span class="tag">GLPI</span>
+        <span class="tag">Azure</span>
+        <span class="tag">GCP</span>
+        <span class="tag">Office 365</span>
+        <span class="tag">Active Directory</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-icon">🧠</div>
+      <h3 class="t" data-fr="Soft Skills" data-en="Soft Skills">Soft Skills</h3>
+      <div class="tags">
+        <span class="tag t" data-fr="Esprit d'analyse" data-en="Analytical mindset">Esprit d'analyse</span>
+        <span class="tag t" data-fr="Rigueur" data-en="Rigor">Rigueur</span>
+        <span class="tag t" data-fr="Adaptabilité" data-en="Adaptability">Adaptabilité</span>
+        <span class="tag t" data-fr="Travail en équipe" data-en="Teamwork">Travail en équipe</span>
+        <span class="tag t" data-fr="Autonomie" data-en="Autonomy">Autonomie</span>
+        <span class="tag t" data-fr="Curiosité" data-en="Curiosity">Curiosité</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-icon">🌐</div>
+      <h3 class="t" data-fr="Langues" data-en="Languages">Langues</h3>
+      <div class="tags">
+        <span class="tag t" data-fr="Français (natif)" data-en="French (native)">Français (natif)</span>
+        <span class="tag gold">Anglais B2 — TOEIC 840</span>
+        <span class="tag t" data-fr="Arabe B1" data-en="Arabic B1">Arabe B1</span>
+        <span class="tag t" data-fr="Espagnol A1" data-en="Spanish A1">Espagnol A1</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMATION -->
+<section id="formation">
+  <div class="section-header fade-in">
+    <div class="section-label t" data-fr="Parcours académique" data-en="Academic background">Parcours académique</div>
+    <h2 class="section-title t" data-fr="Formation" data-en="Education">Formation</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card fade-in">
+      <div class="edu-year">2024 — 2026</div>
+      <div class="edu-degree t" data-fr="Master 2 — Management et Conseil en SI" data-en="MSc — Information Systems Management & Consulting">Master 2 — Management et Conseil en SI</div>
+      <div class="edu-school">ESGI — École Supérieure de Génie Informatique, Paris</div>
+    </div>
+    <div class="edu-card fade-in">
+      <div class="edu-year">2021 — 2024</div>
+      <div class="edu-degree t" data-fr="Bachelor — Informatique (Management et Conseil en SI)" data-en="Bachelor — Computer Science (IS Management & Consulting)">Bachelor — Informatique (Management et Conseil en SI)</div>
+      <div class="edu-school">ESGI — École Supérieure de Génie Informatique, Paris</div>
+    </div>
+    <div class="edu-card fade-in">
+      <div class="edu-year t" data-fr="Auto-formation continue" data-en="Ongoing self-training">Auto-formation continue</div>
+      <div class="edu-degree">SAP S/4HANA — SAP Learning Hub</div>
+      <div class="edu-school t" data-fr="ERP Fundamentals : Plan-to-Produce, Procure-to-Pay, Order-to-Cash" data-en="ERP Fundamentals: Plan-to-Produce, Procure-to-Pay, Order-to-Cash">ERP Fundamentals : Plan-to-Produce, Procure-to-Pay, Order-to-Cash</div>
+    </div>
+    <div class="edu-card fade-in">
+      <div class="edu-year t" data-fr="Prévu Mars 2026" data-en="Expected March 2026">Prévu Mars 2026</div>
+      <div class="edu-degree">Professional Scrum Master I (PSM I)</div>
+      <div class="edu-school">Scrum.org</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="section-header fade-in">
+    <div class="section-label t" data-fr="Travaillons ensemble" data-en="Let's work together">Travaillons ensemble</div>
+    <h2 class="section-title t" data-fr="Contact" data-en="Contact">Contact</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="contact-grid fade-in">
+    <div class="contact-item">
+      <div class="contact-icon">✉️</div>
+      <div>
+        <div class="contact-label">Email</div>
+        <div class="contact-value">youssefabdelmalki1@gmail.com</div>
+      </div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">📱</div>
+      <div>
+        <div class="contact-label t" data-fr="Téléphone" data-en="Phone">Téléphone</div>
+        <div class="contact-value">07 82 35 48 81</div>
+      </div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">📍</div>
+      <div>
+        <div class="contact-label t" data-fr="Localisation" data-en="Location">Localisation</div>
+        <div class="contact-value">Paris, 75015</div>
+      </div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">💼</div>
+      <div>
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-value">@Youssef Abdelmalki</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Youssef Abdelmalki — Consultant SAP S/4HANA & Supply Chain</p>
+</footer>
+
+<script>
+  // LANG SYSTEM
+  let currentLang = 'fr';
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+    });
+    document.querySelectorAll('.t').forEach(el => {
+      const val = el.getAttribute('data-' + lang);
+      if (val) el.textContent = val;
+    });
+  }
+
+  // SCROLL ANIMATIONS
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Init FR
+  setLang('fr');
+</script>
+</body>
+</html>
